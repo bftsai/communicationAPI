@@ -1,0 +1,62 @@
+<html> 
+ <head> 
+ <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"> 
+ <title>Web page from child.com</title> 
+ <script type="text/JavaScript"> 
+     //event 参数中有 data 属性，就是父窗口发送过来的数据
+    window.addEventListener("message", function( event ) { 
+         // 把父窗口发送过来的数据显示在子窗口中
+        document.getElementById("content").innerHTML = '';
+        document.getElementById("content").innerHTML+=event.data+"<br/>"; 
+        // console.log(event.data);
+        const ul = document.getElementById('ul');
+        ul.innerHTML = `<li>1</li>
+        <li>2</li>
+        <li>3</li>
+        <li>1</li>
+        <li>2</li>
+        <li>3</li>
+        <li>4</li>
+        <li>5</li>
+        <li>6</li>
+        <li>7</li>
+        <li>8</li>
+        <li>9</li>
+        <li>10</li>`;
+        if ( !event.data ) {
+            return;
+        }
+        const liArr = [...document.querySelectorAll('#ul li')];
+        let str = '';
+        liArr.forEach(item => {
+            if (item.textContent === event.data) {
+                str += `<li>${item.textContent}</li>`;
+            }
+        });
+        ul.innerHTML = str;
+    }, false ); 
+
+ </script> 
+ </head> 
+ <body> 
+    <h1>Child Page</h1>
+    <div id="content">
+
+    </div>
+    <ul id="ul">
+        <li>1</li>
+        <li>2</li>
+        <li>3</li>
+        <li>1</li>
+        <li>2</li>
+        <li>3</li>
+        <li>4</li>
+        <li>5</li>
+        <li>6</li>
+        <li>7</li>
+        <li>8</li>
+        <li>9</li>
+        <li>10</li>
+    </ul> 
+ </body> 
+ </html>
